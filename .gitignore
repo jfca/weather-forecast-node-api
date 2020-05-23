@@ -105,3 +105,8 @@ dist
 # TernJS port file
 .tern-port
 
+# Pycharm project files
+.idea
+*.iml
+out
+gen
