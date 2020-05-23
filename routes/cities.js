@@ -72,12 +72,35 @@ router.get('/countrycode/:code', async (req, res) => {
     }
 });
 
-// @route   GET api/cities/name/:code
+// @route   GET api/cities/name/:name
 // @desc    get all cities from city name
 // @access  private
 router.get('/name/:name', async (req, res) => {
     try {
-        const cities = await City.find({ name: req.params.name });
+        let query = {};
+        query['name'] = { $regex: `^${req.params.name}$`, $options: 'i' };
+        console.log(query);
+        const cities = await City.find(query);
+        await res.json(cities);
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route   GET api/cities/location/:lonlat
+// @desc    get all cities within a specified distance in kilometres from a single lon and lat array pair
+// @access  private
+router.get('/location/', async (req, res) => {
+    try {
+        const earth_circumference = 6378.1; /* kilometres */
+        const cities = await City.find({
+            location: {
+                $geoWithin: {
+                    $centerSphere: [ [ req.query.lon, req.query.lat ], req.query.distance / earth_circumference ]
+                }
+            }
+        });
         await res.json(cities);
     } catch (e) {
         console.error(e.message);
@@ -98,20 +121,17 @@ router.get('/city/id/:id', async (req, res) => {
     }
 });
 
-// @route   GET api/cities/city/name/:name
+// @route   GET api/cities/city/:namecountry
 // @desc    get city object from name and country code
 // @access  private
-router.get('/city/name/:name', async (req, res) => {
+router.get('/city/name/', async (req, res) => {
     try {
         let query = {};
-        const queryArr = req.params.name.split(',');
-        if (queryArr.length === 2) {
-            query['name'] = { $regex: queryArr[0].trim(), $options: 'i' };
-            query['country'] = { $regex: queryArr[1].trim(), $options: 'i' };
-        } else {
-            throw 'Bad query string';
-        }
+        query['name'] = { $regex: req.query.city, $options: 'i' };
+        query['country'] = { $regex: req.query.country, $options: 'i' };
+        console.log(query);
         const city = await City.findOne(query);
+        console.log(city);
         await res.json(city);
     } catch (e) {
         console.error(e.message);

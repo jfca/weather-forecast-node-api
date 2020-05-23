@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb+srv://forecaster_user:7tR3^wa6bW$vgFuqQeZ!@cluster0-cy0ih.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://forecaster_user:txFPmHNigRFHPQ0X@cluster0-cy0ih.mongodb.net/test",
   "mongolocalURI": "mongodb://localhost:27017",
   "citiesURI": "http://192.168.209.9:30000/portfolio/weather-forecast-clients/weather-forecast-sample-data/raw/master/city.list.json",
   "citiesgzipURI": "http://192.168.209.9:30000/portfolio/weather-forecast-clients/weather-forecast-sample-data/raw/master/city.list.json.gz",
