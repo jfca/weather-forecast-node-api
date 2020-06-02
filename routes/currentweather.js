@@ -14,7 +14,7 @@ const getCurrentFromOpenWeather = async id => {
         const URL = `${OWMURI}id=${id}&${openweatherAPIkey}`;
         console.log(URL);
         const res = await axios.get(URL);
-        console.log(res);
+        console.log(res.data);
         return res.data;
     } catch (e) {
         console.error(e.message);
@@ -24,6 +24,7 @@ const getCurrentFromOpenWeather = async id => {
 
 // Get current weather information for specified is
 const getCurrentWeather = async (id) => {
+    console.log('getCurrentWeather');
     try {
         console.log(`city id: ${id}`);
         let current = await CurrentWeather.findOne({ id: id });
