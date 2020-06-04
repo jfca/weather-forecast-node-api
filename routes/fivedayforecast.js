@@ -21,8 +21,9 @@ const getForecastFromOpenWeather = async id => {
 
 // Get forecast weather information for specified id
 const get5DayForecast = async id => {
+    console.log('get5DayForecast');
     try {
-        let forecast = await FiveDayForecast.findOne({city: { id: id }});
+        let forecast = await FiveDayForecast.findOne({ "city.id": id });
 
         console.log('id: ' + id);
         if (!forecast) {
