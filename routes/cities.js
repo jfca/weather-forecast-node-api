@@ -16,7 +16,7 @@ const getCities = async () => {
     }
 };
 
-// @route   GET api/cities/load
+// @route   GET api/cities/loadcities
 // @desc    load all cities into database
 // @access  public
 router.get('/loadcities', async (req, res) => {
@@ -46,12 +46,17 @@ router.get('/loadcities', async (req, res) => {
     }
 });
 
-// @route   GET api/cities/count
-// @desc    get count of all cities
-// @access  private
+/**
+ * HTTP GET request for the total count of cities
+ * @route   GET api/cities/count
+ * @desc    get count of all cities
+ * @access  private
+ */
 router.get('/count', async (req, res) => {
+    console.log('/count endpoint');
     try {
         const numCities = await City.countDocuments({});
+        console.log(`numCities: ${numCities}`);
         await res.json(numCities);
     } catch (e) {
         console.error(e.message);
