@@ -22,5 +22,9 @@
   "devDependencies": {
     "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@192.168.1.232:30001/portfolio/weather-forecast-clients/weather-forecast-node-api.git"
   }
 }
