@@ -1,3 +1,10 @@
 {
-  "mongoURI": "mongodb+srv://forecaster_user:7tR3^wa6bW$vgFuqQeZ!@cluster0-cy0ih.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://forecaster_user:7tR3^wa6bW$vgFuqQeZ!@cluster0-cy0ih.mongodb.net/test?retryWrites=true&w=majority",
+  "mongolocalURI": "mongodb://localhost:27017",
+  "citiesURI": "http://192.168.209.9:30000/portfolio/weather-forecast-clients/weather-forecast-sample-data/raw/master/city.list.json",
+  "citiesgzipURI": "http://192.168.209.9:30000/portfolio/weather-forecast-clients/weather-forecast-sample-data/raw/master/city.list.json.gz",
+  "countriesURI": "http://192.168.209.9:30000/portfolio/weather-forecast-clients/weather-forecast-sample-data/raw/master/countries.json",
+  "OWMURI": "https://api.openweathermap.org/data/2.5/weather?",
+  "OWFURI": "https://api.openweathermap.org/data/2.5/forecast?",
+  "openweatherAPIkey": "appid=faa1d9206fbc58716a7774bbae132d94"
 }

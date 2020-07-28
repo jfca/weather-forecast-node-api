@@ -15,7 +15,8 @@ app.get('/', (req, res) => res.json({ msg: 'Welcome to the Forecaster API...'}))
 app.use('/api/countries', require('./routes/countries'));
 app.use('/api/cities', require('./routes/cities'));
 app.use('/api/weather/current', require('./routes/currentweather'));
-app.use('/api/weather/5dayforecast', require('./routes/5dayforecast'));
+app.use('/api/weather/5dayforecast', require('./routes/fivedayforecast'));
+//@TODO Implement user authentication feature
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 
