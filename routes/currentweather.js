@@ -14,6 +14,7 @@ const getCurrentFromOpenWeather = async id => {
         const URL = `${OWMURI}id=${id}&${openweatherAPIkey}`;
         console.log(URL);
         const res = await axios.get(URL);
+        console.log(res);
         return res.data;
     } catch (e) {
         console.error(e.message);
@@ -22,10 +23,9 @@ const getCurrentFromOpenWeather = async id => {
 };
 
 // Get current weather information for specified is
-const getCurrentWeather = async id => {
-    console.log('getCurrentWeather');
-
+const getCurrentWeather = async (id) => {
     try {
+        console.log(`city id: ${id}`);
         let current = await CurrentWeather.findOne({ id: id });
 
         if (!current) {
@@ -40,6 +40,11 @@ const getCurrentWeather = async id => {
         const { created } = current;
         const createdTime = Date.parse(created);
         const time_diff = 60 * 60000; // 1 hour
+        console.log(`currentTime: ${currentTime}`);
+        console.log(new Date(currentTime));
+        console.log(`createdTime: ${createdTime}`);
+        console.log(new Date(createdTime));
+        console.log(`createdTime + time_diff: ${(createdTime + time_diff)}`);
         if (currentTime > (createdTime + time_diff)) {
             console.log('(currentTime > (createdTime + time_diff))');
             const current_json = await getCurrentFromOpenWeather(id);

@@ -89,9 +89,38 @@ router.get('/name/:name', async (req, res) => {
 });
 
 // @route   GET api/cities/location/:lonlat
-// @desc    get all cities within a specified distance in kilometres from a single lon and lat array pair
+// @desc    get city object from lng / lat coordinates
 // @access  private
 router.get('/location/', async (req, res) => {
+    try {
+        const earth_circumference = 6378.1; /* kilometres */
+        const query = {
+            location: {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: [
+                            req.query.lon,
+                            req.query.lat
+                        ]
+                    }, $maxDistance: 1
+                }
+            }
+        };
+        const cities = await City.findOne(query);
+        console.log('GET /cities/location/');
+        console.log(query)
+        await res.json(cities);
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route   GET api/cities/area/:lonlat
+// @desc    get all cities within a specified distance in kilometres from a single lon and lat array pair
+// @access  private
+router.get('/area/', async (req, res) => {
     try {
         const earth_circumference = 6378.1; /* kilometres */
         const cities = await City.find({
@@ -101,6 +130,7 @@ router.get('/location/', async (req, res) => {
                 }
             }
         });
+        console.log('GET /cities/area/');
         await res.json(cities);
     } catch (e) {
         console.error(e.message);
